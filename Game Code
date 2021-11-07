@@ -1,0 +1,71 @@
+import random
+import time
+
+
+class Numbers:
+
+    def __init__(self):
+        self.guesses = 0
+        self.MIN = 1
+        self.MAX = 100
+
+    def intro(self):
+        print("Welcome to Numbers, a game by Michael Nolan.")
+        time.sleep(0.25)
+        print(f"To win numbers, guess a random number between {self.MIN} and {self.MAX} in as little tries as possible.")
+        time.sleep(0.25)
+
+    def valid_number(self, integer):
+        if integer < self.MIN or integer > self.MAX:
+            return False
+        else:
+            return True
+
+    def play(self):
+
+        self.intro()
+        x = random.randint(self.MIN, self.MAX)
+        print("Enter a number:")
+
+        while True:
+            y = int(input())
+
+            if self.valid_number(y):
+                pass
+            else:
+                print("Invalid entry.")
+                time.sleep(0.25)
+                continue
+
+            if y == x:
+                self.guesses += 1
+                print(f"{y} is correct! You just won Numbers!")
+                time.sleep(0.25)
+                self.ending()
+                break
+
+            elif y < x:
+                self.guesses += 1
+                print("Higher.")
+                time.sleep(0.25)
+
+            else:
+                self.guesses += 1
+                print("Lower.")
+                time.sleep(0.25)
+
+    def ending(self):
+        print(f"And it only took you {self.guesses} guesses to win.")
+        time.sleep(0.25)
+        answer = input("Would you like to play again?\n")
+        if answer == "yes":
+            self.guesses = self.guesses * 0
+            self.play()
+        else:
+            print("Maybe another time, goodbye!")
+            time.sleep(0.25)
+            quit()
+
+
+num = Numbers()
+num.play()
